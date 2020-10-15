@@ -1,0 +1,32 @@
+n=int(input())
+arr = dict()
+def countrec(n):
+    if n == 0 or n == 1:
+
+        return 1
+    else:
+        c = 0
+        for i in range(1, n + 1):
+            c += countrec(i - 1) * countrec(n - i)
+
+        return c
+
+def count(n, arr):
+    if arr.get(n,-1) != -1:
+        return (arr[n],arr)
+    if n == 0 or n == 1:
+        arr[n] = 1
+        return (arr[n],arr)
+    else:
+        c = 0
+        for i in range(1, n + 1):
+            c += count(i - 1, arr)[0] * count(n - i, arr)[0]
+        arr[n] = c
+        return (c,arr)
+
+print(count(n, arr)[0])
+print(count(n, arr)[1])
+print(countrec(n))
+
+
+
